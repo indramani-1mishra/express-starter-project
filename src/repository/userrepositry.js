@@ -1,9 +1,6 @@
 const User = require("../schema/usersschema");
 
-class userrepository
-{
-   
-    async findUser(parameter){
+    async function findUser(parameter){
       try
       {
         const response = await User.findOne({...parameter});
@@ -15,7 +12,7 @@ class userrepository
         console.log("error find at repository layer"+error)
       }
     }
-    async createuser(userdetails)
+    async  function createuser(userdetails)
     {
         try
         {
@@ -29,7 +26,10 @@ class userrepository
         }
         
     }
-}
 
-module.exports =userrepository;
+
+module.exports ={
+  findUser,
+  createuser
+}
 

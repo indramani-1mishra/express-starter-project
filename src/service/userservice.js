@@ -1,16 +1,9 @@
+const { findUser, createuser } = require("../repository/userrepositry");
 const { emit } = require("../schema/usersschema");
 
-class Userservice{
+   async function  ragisteruser(userdetails){
 
-
-    constructor(_userrepository)
-    {
-        this.userrepository= _userrepository;
-    }
-
-   async ragisteruser(userdetails){
-
-        const user = await this.userrepository.findUser({
+        const user = await findUser({
             email:userdetails.email,
             phonenumber:userdetails.phonenumber,
         });
@@ -23,11 +16,12 @@ class Userservice{
             }
         }
 
-        const newuser= await this.userrepository.createuser({
+        const newuser= await createuser({
             firstname:userdetails.firstname,
             lastname:userdetails.lastname,
             email:userdetails.email,
             phonenumber:userdetails.phonenumber,
+            password:userdetails.password,
         })
 
         if(!newuser)
@@ -39,9 +33,7 @@ class Userservice{
         }
 
         return newuser;
-
     }
-
-    
+module.exports={
+    ragisteruser
 }
-module.exports=Userservice;
