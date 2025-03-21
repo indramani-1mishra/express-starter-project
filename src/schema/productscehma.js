@@ -25,23 +25,13 @@ const productschema = new Schema({
     category: {
         type: String,
         enum: ["veg", "non-veg", "drinks"],
-        required: true
+        required: true,
+        default: 'veg'
     },
     instock: {
         type: Boolean,
         default: true  // ✅ Default value true
     },
-    ratings: {
-        type: Number,
-        default: 0,
-        min: 0,
-        max: 5  // ✅ Ratings between 0 to 5
-    },
-    reviews: {
-        type: Number,
-        default: 0
-    },
-   
 }, {
     timestamps: true
 });
