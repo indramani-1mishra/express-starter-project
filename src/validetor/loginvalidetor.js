@@ -2,7 +2,7 @@ const jwt = require('jsonwebtoken');
 const { JWT_SECRET_KEY } = require('../config/serverconfig');
 
 const isloggedin = async (req, res, next) => {
-    const token = req.cookies["authtoken"];  // ✅ Corrected line
+    const token = req.cookies["authtoken"];
 
     if (!token) {
         return res.status(401).json({
@@ -17,7 +17,8 @@ const isloggedin = async (req, res, next) => {
         const decode = jwt.verify(token, JWT_SECRET_KEY);
         req.user = {
             email: decode.email,
-            id: decode.id
+            id: decode.id,
+            role: decode.role
         };
         next();
     } catch (error) {
@@ -30,6 +31,25 @@ const isloggedin = async (req, res, next) => {
     }
 };
 
+const isadmin = (req, res, next) => {
+    if (req.user && req.user.role === 'admin') {
+        console.log(req.user.role);
+        return next();
+    }
+    else{
+        return res.status(403).json({
+            message: "You are not authorized for this action",
+            success: false,
+            data: {},
+            error: {
+                status: 403,
+                reason: "User unauthorized for this action"
+            }
+        });
+    }
+};
+
 module.exports = {
-    isloggedin
+    isloggedin,
+    isadmin
 };

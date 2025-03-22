@@ -23,9 +23,11 @@ const loginuser = async (logindetails) => {
       status: 401,
     };
   }
+  const userrole = user.role ?? "admin";
+  console.log(userrole);
 
   const token = jwt.sign(
-    { email: user.email, id: user._id },
+    { email: user.email, id: user._id ,role:userrole},
     JWT_SECRET_KEY,
     { expiresIn: EXPIRE_TIME }
   );

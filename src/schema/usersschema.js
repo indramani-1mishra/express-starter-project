@@ -36,7 +36,13 @@ const usersDetailSchema = new Schema({
     type: String,
     required: [true, "Password is required"],
     trim: true,
+},
+   role: {
+    type: String,
+    enum: ["admin", "user"],
+    default: "user"
 }
+
 
 }, {
     timestamps: true

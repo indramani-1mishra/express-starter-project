@@ -1,3 +1,4 @@
+const { createcart } = require("../repository/createcart");
 const { findUser, createuser } = require("../repository/userrepositry");
 const { emit } = require("../schema/usersschema");
 
@@ -22,6 +23,7 @@ const { emit } = require("../schema/usersschema");
             email:userdetails.email,
             phonenumber:userdetails.phonenumber,
             password:userdetails.password,
+            role:userdetails.role
         })
 
         if(!newuser)
@@ -31,6 +33,8 @@ const { emit } = require("../schema/usersschema");
             status:404,
           }
         }
+
+        await createcart(newuser._id);
 
         return newuser;
     }
