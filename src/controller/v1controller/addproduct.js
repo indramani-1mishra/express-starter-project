@@ -2,7 +2,7 @@ const { addproduct, findproductbyid, deleteproductsbyids, updateproducts, findal
 
 const addproductc = async(req, res) => {
     try {
-       console.log( req.body.description);
+       
         if (!req.file) {
             return res.status(400).json({
                 message: "No file uploaded",
@@ -18,6 +18,7 @@ const addproductc = async(req, res) => {
             price: req.body.price,
             category: req.body.category,
             instock: req.body.instock,
+            quantity:req.body.quantity,
         });
 
         return res.status(201).json({
@@ -101,6 +102,7 @@ const updateproductc = async (req, res) => {
             price: req.body.price,
             category: req.body.category,
             instock: req.body.instock,
+           
         };
 
         // ✅ If file is uploaded, add image path

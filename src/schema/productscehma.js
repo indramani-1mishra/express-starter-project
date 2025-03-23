@@ -32,6 +32,11 @@ const productschema = new Schema({
         type: Boolean,
         default: true  // ✅ Default value true
     },
+    quantity:{
+          type:Number,
+          required:true,
+          default:20,
+    }
 }, {
     timestamps: true
 });
